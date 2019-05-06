@@ -1,0 +1,87 @@
+<html>
+  <head>
+	<meta charset="UTF-8">
+	<title>Cabin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.13/c3.min.css" rel="stylesheet">
+	<link rel="ca" href="/crypto/ca.pem">
+
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   		integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   		crossorigin=""
+	/>
+	<script
+		src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+		integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+		crossorigin=""
+	></script>
+	<script src="http://livejs.com/live.js"></script>
+
+	<style>
+		body {
+			font-family: sans-serif;
+			color: white;
+			background-color: #333;
+		}
+		.box {
+			padding: 5pt;
+			border-style: solid;
+			border-width: 3px;
+			border-color: white;
+			border-radius: 5pt;
+			margin: 5pt;
+
+		}
+		th {
+			text-align: left;
+		}
+		table {
+			border-collapse: collapse;
+		}
+		table td {
+			border: 1pt solid gray;
+			padding: 3pt;
+		}
+		#mapid {
+			height: 180px;
+		}
+	</style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/mic-sdk-js@latest/dist/mic-sdk-js.min.js"></script>
+	<div id="form" class="box">
+
+		<input type="radio" name="thing" value="00001737" id="id-00001737" checked="checked"/>
+		<label for="id-00001737">David NB-IoT</label>
+		<br/>
+
+		<input type="radio" name="thing" value="00001743" id="id-00001743"/>
+		<label for="id-00001743">David LoRa</label>
+		<br/>
+
+
+		<input type="radio" name="thing" value="00001734" id="id-00001734"/>
+		<label for="id-00001734">Simon NB-IoT</label>
+		<br/>
+		<br/>
+		<button type="button" onclick="onSubmitForm()">Submit</button>
+
+
+	</div>
+
+	<div id='value-table' class="box"></div>
+	<div id='mqtt' class="box"></div>
+	<div id='log' class="box"></div>
+	<div id="mapid"></div>
+
+	<div id='cards'>
+		<div class='card'>
+			<div id='hum'></div>
+			<div id='hum-chart'></div>
+		</div>
+	</div>
+
+	<script src="bundle.js"></script>
+	</body>
+</html>
