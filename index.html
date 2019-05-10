@@ -2,75 +2,47 @@
   <head>
 	<meta charset="UTF-8">
 	<title>Cabin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.13/c3.min.css" rel="stylesheet">
-	<link rel="ca" href="/crypto/ca.pem">
-
-	<link
-		rel="stylesheet"
-		href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-   		integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   		crossorigin=""
-	/>
-	<script
-		src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-		integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-		crossorigin=""
-	></script>
-	<script src="http://livejs.com/live.js"></script>
-
-	<style>
-		body {
-			font-family: sans-serif;
-			background-color: #333;
-		}
-		.box {
-			padding: 5pt;
-			border-style: solid;
-			border-width: 3px;
-			border-color: white;
-			border-radius: 5pt;
-			margin: 5pt;
-
-		}
-		th {
-			text-align: left;
-		}
-		table {
-			border-collapse: collapse;
-		}
-		table td {
-			border: 1pt solid gray;
-			padding: 3pt;
-		}
-		#lat-graphics {
-			height: 180px;
-		}
-		#cards {
-			display: grid;
-			/* Display as a Grid */
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			/* repeat = as many times as you can fit */
-			/* auto-fit = fit as many items on the line as possible, go bigger if you need to */
-			/*minmax = (min size, max size) = the minimum size the column should be is 200px, but if there's space then give them all 1fr of that width. */
-			grid-gap: 10px;
-		}
-		.card {
-			background-color: #eee;
-			text-align: center;
-			border-radius: 10px;
-			padding: 5;
-		}
-	</style>
   </head>
   <body>
     <script src="https://unpkg.com/mic-sdk-js@latest/dist/mic-sdk-js.min.js"></script>
 
-	<div id='cards'>
-	</div>
+	<div id='log'></div>
 
-	<div id="mapid"></div>
+	<script>
 
-	<script src="bundle.js"></script>
+function log(str) {
+	document.getElementById('log').innerHTML += str + '<br/>'
+}
+MIC.init({
+	username: 'simonsolnes',
+	password: 'RX6Ad+9Ct?eT84('
+}).then(() => {
+	MIC.mqtt()
+	.then((client) => {
+		client.on('connect',
+			function () {
+				client.subscribe('#');
+
+				log('connected')
+			}
+		);
+		client.on('message', function (topic, message) {
+			try {
+				var json = JSON.parse(message.toString());
+
+
+				log('got a message: ' + message)
+
+			} catch (e) {
+				log('error: ' + e)
+			}
+		});
+
+
+	});
+});
+
+	</script>
 
 	</body>
 </html>
