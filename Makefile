@@ -1,5 +1,5 @@
-all: main.js
-	browserify main.js -o bundle.js
+all: main.js cards.js
+	browserify main.js cards.js -o bundle.js
 	rm -fr $(WEBSERVER)/iot
 	cp -r ./ $(WEBSERVER)/iot
 

@@ -21,7 +21,6 @@
 	<style>
 		body {
 			font-family: sans-serif;
-			color: white;
 			background-color: #333;
 		}
 		.box {
@@ -43,45 +42,35 @@
 			border: 1pt solid gray;
 			padding: 3pt;
 		}
-		#mapid {
+		#lat-graphics {
 			height: 180px;
+		}
+		#cards {
+			display: grid;
+			/* Display as a Grid */
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			/* repeat = as many times as you can fit */
+			/* auto-fit = fit as many items on the line as possible, go bigger if you need to */
+			/*minmax = (min size, max size) = the minimum size the column should be is 200px, but if there's space then give them all 1fr of that width. */
+			grid-gap: 10px;
+		}
+		.card {
+			background-color: #eee;
+			text-align: center;
+			border-radius: 10px;
+			padding: 5;
 		}
 	</style>
   </head>
   <body>
     <script src="https://unpkg.com/mic-sdk-js@latest/dist/mic-sdk-js.min.js"></script>
-	<div id="form" class="box">
-
-		<input type="radio" name="thing" value="00001737" id="id-00001737" checked="checked"/>
-		<label for="id-00001737">David NB-IoT</label>
-		<br/>
-
-		<input type="radio" name="thing" value="00001743" id="id-00001743"/>
-		<label for="id-00001743">David LoRa</label>
-		<br/>
-
-
-		<input type="radio" name="thing" value="00001734" id="id-00001734"/>
-		<label for="id-00001734">Simon NB-IoT</label>
-		<br/>
-		<br/>
-		<button type="button" onclick="onSubmitForm()">Submit</button>
-
-
-	</div>
-
-	<div id='value-table' class="box"></div>
-	<div id='mqtt' class="box"></div>
-	<div id='log' class="box"></div>
-	<div id="mapid"></div>
 
 	<div id='cards'>
-		<div class='card'>
-			<div id='hum'></div>
-			<div id='hum-chart'></div>
-		</div>
 	</div>
 
+	<div id="mapid"></div>
+
 	<script src="bundle.js"></script>
+
 	</body>
 </html>
