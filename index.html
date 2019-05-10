@@ -19,9 +19,12 @@ MIC.init({
 }).then(() => {
 	MIC.mqtt()
 	.then((client) => {
+		client.on('reconnect', function() {
+			log('reconnect')
+		});
 		client.on('connect',
 			function () {
-				client.subscribe('#');
+				client.subscribe('thing-update/inf-3910-3-v19/#');
 
 				log('connected')
 			}
